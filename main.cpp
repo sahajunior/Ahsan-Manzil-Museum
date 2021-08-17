@@ -2,6 +2,7 @@
 #include<mmsystem.h>
 #include "components.h"
 
+/*  Variable Declaration    */
 GLfloat rotation_increaser = 0.0f;
 GLfloat position = 0.0f;
 GLfloat speed = 0.1f;
@@ -31,14 +32,17 @@ bool isFullScreen = false;
 bool isAuto = true;
 
 
-void autoView(){
-  if(autoNightTimer > 25){
+void autoView()
+{
+    if(autoNightTimer > 25)
+    {
         isDay = !isDay;
         autoNightTimer = 0.0f;
     }
     autoNightTimer += autoNightSpeed;
 
-    if(autoRainTimer > 10){
+    if(autoRainTimer > 10)
+    {
         isRainy = !isRainy;
         (isRainy) ? PlaySound("assets/rain.wav", NULL, SND_FILENAME|SND_ASYNC|SND_LOOP) : PlaySound(NULL, 0, 0);
         autoRainTimer = 0.0f;
@@ -48,7 +52,8 @@ void autoView(){
 
 
 
-void update(int value) {
+void update(int value)
+{
 
     if(position <-1.0)
         position = 1.0f;
@@ -86,8 +91,8 @@ void update(int value) {
 
     (isAuto) ? autoView() : blank();
 
-	glutPostRedisplay();
-	glutTimerFunc(100, update, 0);
+    glutPostRedisplay();
+    glutTimerFunc(100, update, 0);
 }
 
 
@@ -96,7 +101,8 @@ void Idle()
     glutPostRedisplay();
 }
 
-void initState(){
+void initState()
+{
     glClearColor(0.5f, 1.0f, 1.0f, 0.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glEnable(GL_COLOR_MATERIAL | GL_LIGHTING);
@@ -108,7 +114,8 @@ void initState(){
 }
 
 
-void axisDraw(){
+void axisDraw()
+{
     glBegin(GL_LINES);
     glColor3ub(0, 0, 0);
     glVertex2f(1.0f, 0.0f);
@@ -118,8 +125,9 @@ void axisDraw(){
     glEnd();
 }
 
-void ahsanMonjilView(){
-
+/*  Main Building's Code Starts From Here*/
+void ahsanMonjilView()
+{
     anyQuad(0.8f, 0.5f, 0.8f, 0.1f, -0.8f, 0.1f, -0.8f, 0.5f, 255, 99, 71);;
 
     glBegin(GL_LINES);
@@ -137,34 +145,34 @@ void ahsanMonjilView(){
     glEnd();
     glLineWidth(4);
 
-     //middleBody
+    //  MIDDLE BODY
     glLoadIdentity();
-    //glColor3ub(255, 99, 71);
+    glColor3ub(255, 99, 71);
     anyQuad(-0.06, 0.54, -0.06, 0.3, 0.11, 0.3, 0.11, 0.54, 255, 99, 71);
     glLoadIdentity();
 
-    //mainDoor
+    //  MAIN DOOR
     glLoadIdentity();
     glTranslatef(0.736, -0.1245, 0);
     glScalef(1, 1.5, 0);
     ovalWindowComponent(178, 34, 34);
     glLoadIdentity();
 
-    //leftDoor
+    //  LEFT DOOR
     glLoadIdentity();
     glTranslatef(0.32, -0.066, 0);
     glScalef(0.5, 1.3, 0);
     ovalWindowComponent(178, 34, 34);
     glLoadIdentity();
 
-    //rightDoor
+    //  RIGHT DOOR
     glLoadIdentity();
     glTranslatef(0.44, -0.066, 0);
     glScalef(0.5, 1.3, 0);
     ovalWindowComponent(178, 34, 34);
     glLoadIdentity();
 
-    //mainGombujhRight
+    //  MAIN DOME => RIGHT
     glLoadIdentity();
     glColor3ub(255, 99, 71);
     glBegin(GL_POLYGON);
@@ -178,8 +186,8 @@ void ahsanMonjilView(){
     glEnd();
 
     glLoadIdentity();
-    //glColor3ub(255, 99, 71);
-    anyQuad(0.02, 0.8, 0.03, 0.8, 0.027, 0.815, 0.023, 0.815, 255, 99, 71);//topPoint
+    //  Top Point
+    anyQuad(0.02, 0.8, 0.03, 0.8, 0.027, 0.815, 0.023, 0.815, 255, 99, 71);
     glLoadIdentity();
 
     glLoadIdentity();
@@ -188,7 +196,7 @@ void ahsanMonjilView(){
     lineComponent(0.025, 0.815, 0.025, 0.83);
     glLoadIdentity();
 
-    //mainGombujhLeft
+    //  MAIN DOME => LEFT
     glLoadIdentity();
     glColor3ub(255, 99, 71);
     glBegin(GL_POLYGON);
@@ -202,7 +210,8 @@ void ahsanMonjilView(){
     glEnd();
 
     glLoadIdentity();
-    glColor3ub(0, 0, 0);//gombuhjMiddleBorder
+    //  DOME => MIDDLE BORDER
+    glColor3ub(0, 0, 0);
     glTranslatef(0, 0.02, 0);
     glBegin(GL_POLYGON);
     glVertex2f(-0.065, 0.63);
@@ -218,7 +227,8 @@ void ahsanMonjilView(){
     glLoadIdentity();
 
     glLoadIdentity();
-    glColor3ub(255, 99, 71);//lowerPartOfGombujh
+    //  DOME => LOWER PART
+    glColor3ub(255, 99, 71);
     glBegin(GL_POLYGON);
     glVertex2f(-0.06, 0.63);
     glVertex2f(-0.06, 0.54);
@@ -234,9 +244,9 @@ void ahsanMonjilView(){
 
 
 
-//middleLeftPillar
+    //  => MIDDLE LEFT PILLAR
     glLoadIdentity();
-    //glColor3ub(255,140,0);
+    glColor3ub(255,140,0);
     anyQuad(-0.09, 0.59, -0.084, 0.564, -0.062, 0.564, -0.057, 0.59, 255,140,0);
     glLoadIdentity();
     glTranslatef(0.237, 0.24, 0);
@@ -295,22 +305,23 @@ void ahsanMonjilView(){
     lineComponent(0.1, 0.65, 0.1, 0.543);
     glLoadIdentity();
 
-    glLoadIdentity();//topDoor
+    glLoadIdentity();
+    //  => TOP DOOR
     glTranslatef(0.308, 0.49, 0);
     glScalef(0.4, 0.3, 0);
     ovalWindowComponent(178, 34, 34);
     glLoadIdentity();
 
-//middleRightPillar
+    //  => Middle Right Pillar
     glLoadIdentity();
-    //glColor3ub(255,140,0);
+    glColor3ub(255,140,0);
     glTranslatef(0.197, 0, 0);
     anyQuad(-0.09, 0.59, -0.084, 0.564, -0.062, 0.564, -0.057, 0.59, 255,140,0);
     glLoadIdentity();
     glTranslatef(0.434, 0.24, 0);
     glScalef(0.4, 0.64, 0);
     pillarComponent();
-    glLoadIdentity();//end
+    glLoadIdentity();
 
     glLoadIdentity();
     glTranslatef(0.15, -0.09, 0);
@@ -395,7 +406,7 @@ void ahsanMonjilView(){
     squareWindowComponent(178, 34, 34);
     glLoadIdentity();
 
-//left windows
+    // LEFT WINDOW
     glLoadIdentity();
     squareWindowComponent(178, 34, 34);
     glLoadIdentity();
@@ -415,7 +426,7 @@ void ahsanMonjilView(){
     ovalWindowComponent(178, 34, 34);
     glLoadIdentity();
 
-//right windows
+    // => RIGHT WINDOW
     glLoadIdentity();
     glTranslatef(1.4, 0, 0);
     squareWindowComponent(178, 34, 34);
@@ -436,7 +447,7 @@ void ahsanMonjilView(){
     ovalWindowComponent(178, 34, 34);
     glLoadIdentity();
 
-//bottom row of windows (left)
+    //  Bottom Row of Left Window
     glLoadIdentity();
     glTranslatef(0.2, -0.2, 0);
     ovalWindowComponent(0, 0, 0);
@@ -457,7 +468,7 @@ void ahsanMonjilView(){
     ovalWindowComponent(0, 0, 0);
     glLoadIdentity();
 
-//upper row of windows (left)
+    //  Upper Row of Left Window
     glLoadIdentity();
     glTranslatef(0.2, 0, 0);
     ovalWindowComponent(0, 0, 0);
@@ -484,7 +495,7 @@ void ahsanMonjilView(){
     glLoadIdentity();
 
 
-//bottom row of windows (right)
+    //  Bottom Row of Right Window
     glLoadIdentity();
     glTranslatef(1.27, -0.2, 0);
     ovalWindowComponent(0, 0, 0);
@@ -506,7 +517,7 @@ void ahsanMonjilView(){
     glLoadIdentity();
 
 
-//upper row of windows (right)
+    //  Upper Row of Right Window
     glLoadIdentity();
     glTranslatef(1.27, 0, 0);
     ovalWindowComponent(0, 0, 0);
@@ -532,7 +543,7 @@ void ahsanMonjilView(){
     ovalWindowComponent(0, 0, 0);
     glLoadIdentity();
 
-//stairs
+    //  Stairs
     anyQuad(-0.08f, 0.3f, 0.13f, 0.3f, 0.29f, 0.0f, -0.25f, 0.0f, 36, 33, 36);
 
     anyQuad(-0.17f, 0.15f, 0.21f, 0.15f, 0.29f, 0.0f, -0.25f, 0.0f, 53, 56, 57);
@@ -566,6 +577,7 @@ void ahsanMonjilView(){
 
 }
 
+// The River
 void WaterView(int R, int G, int B)
 {
 
@@ -589,7 +601,7 @@ void WaterView(int R, int G, int B)
     glVertex2f(1.0f, -0.7f);
     glEnd();
 
-	//waves
+    //  Waves
     glBegin(GL_LINE_STRIP);
     glColor3ub(R, G, B);
     glVertex2f(1.0f, -0.8f);
@@ -624,13 +636,14 @@ void WaterView(int R, int G, int B)
     glLoadIdentity();
 }
 
+// Road Between Main Building & River
 void roadView(int R, int G, int B)
 {
     glLoadIdentity();
     glTranslatef(0.025, 0.0, 0);
     lampComponent(R, G, B);
     glLoadIdentity();
-  //road-base
+    //road-base
 
     glLoadIdentity();
     glTranslatef(-0.2, 0.0, 0);
@@ -663,7 +676,7 @@ void roadView(int R, int G, int B)
 
     anyQuad(-1.0f, 0.0f, -1.0f, -0.22f, 1.0f, -0.22f, 1.0f, 0.0f, 145, 145, 145);
 
-    //road border
+    //  Border of the Road
     glLineWidth(6.0);
     glBegin(GL_LINES);
     glColor3ub(255,255,255);
@@ -671,24 +684,27 @@ void roadView(int R, int G, int B)
     glVertex2f(1.0f, -0.005f);
     glEnd();
 
-    //Road lines
-    float x1,x2,y;
-    x1=-1.0; x2=-0.92; y=-0.0999;
+    //  Lines of the Road
+    float x1, x2, y;
+    x1=-1.0;
+    x2=-0.92;
+    y=-0.0999;
     glLineWidth(6.0);
 
     glBegin(GL_LINES);
 
-        for(int i =0; i<17; i++)
-        {
-            glVertex2f(x1,y );
-            glVertex2f(x2,y);
+    for(int i =0; i<17; i++)
+    {
+        glVertex2f(x1,y );
+        glVertex2f(x2,y);
 
-            x1=x1+.12;
-            x2=x2+.12;
-        }
+        x1=x1+.12;
+        x2=x2+.12;
+    }
 
     glEnd();
 
+    //  Import from "components.h"
     credit();
 
     glLoadIdentity();
@@ -728,9 +744,12 @@ void roadView(int R, int G, int B)
     glLineWidth(4.0);
 }
 
-void mountainView(int R, int G, int B){
+    // Background Mountain View
+void mountainView(int R, int G, int B)
+{
 
-    glLoadIdentity();//Mountain
+    glLoadIdentity();
+    //  Mountain
     glColor3ub(R, G, B);
     glBegin(GL_POLYGON);
     glVertex2f(-1, 0.5);
@@ -751,108 +770,124 @@ void mountainView(int R, int G, int B){
     grassComponent();
 }
 
-
-void buildingsView(int R, int G, int B ){
+    // Side Buildings
+void buildingsView(int R, int G, int B )
+{
     buildingComponent();
-    glTranslatef(0.03f, 0.1f, 0);//TallBuilding1
+    glTranslatef(0.03f, 0.1f, 0);
+    //  Tall Building One
     glScalef(0.5, 1.1, 0);
-    anyQuad(-0.7f , 0.7f, -0.7f, 0.3f, -0.9f, 0.3f, -0.9f, 0.7f, 163, 163, 117);
+    anyQuad(-0.7f, 0.7f, -0.7f, 0.3f, -0.9f, 0.3f, -0.9f, 0.7f, 163, 163, 117);
     glLoadIdentity();
 
     float wp1 = -0.195, wp2 = 0.755;
     for(int w = 0; w < 5; w++)
+    {
+        for(int wj = 0; wj < 8; wj++)
         {
-            for(int wj = 0; wj < 8; wj++){
-             glLoadIdentity();//smallWindowsTallBuilding1
-             glTranslatef(wp1, wp2, 0);
-             glScalef(0.3, 0.25, 0);
-             squareWindowComponent(R, G, B);
-             glLoadIdentity();
-             wp2 -= 0.045;
-            }
-            wp2 = 0.755;
-            wp1 += 0.018;
+            //  Small Window of Tall Building One
+            glLoadIdentity();
+            glTranslatef(wp1, wp2, 0);
+            glScalef(0.3, 0.25, 0);
+            squareWindowComponent(R, G, B);
+            glLoadIdentity();
+            wp2 -= 0.045;
         }
+        wp2 = 0.755;
+        wp1 += 0.018;
+    }
 
     glLoadIdentity();
-    //tallBuilding2
+    //  Tall Building Two
     glTranslatef(0.13f, 0.1f, 0);
     glScalef(0.4, 1.05, 0);
-    anyQuad(-0.7f , 0.7f, -0.7f, 0.3f, -0.9f, 0.3f, -0.9f, 0.7f, 194, 194, 163);
+    anyQuad(-0.7f, 0.7f, -0.7f, 0.3f, -0.9f, 0.3f, -0.9f, 0.7f, 194, 194, 163);
     glLoadIdentity();
 
     wp1 = -0.04, wp2 = 0.745;
     for(int w = 0; w < 4; w++)
+    {
+        for(int wj = 0; wj < 7; wj++)
         {
-            for(int wj = 0; wj < 7; wj++){
-             glLoadIdentity();//smallWindowsTallBuilding2
-             glTranslatef(wp1, wp2, 0);
-             glScalef(0.25, 0.2, 0);
-             squareWindowComponent(R, G, B);
-             glLoadIdentity();
-             wp2 -= 0.045;
-            }
-            wp2 = 0.745;
-            wp1 += 0.018;
+            //  Small Window of Tall Building Two
+            glLoadIdentity();
+            glTranslatef(wp1, wp2, 0);
+            glScalef(0.25, 0.2, 0);
+            squareWindowComponent(R, G, B);
+            glLoadIdentity();
+            wp2 -= 0.045;
         }
+        wp2 = 0.745;
+        wp1 += 0.018;
+    }
 
     glLoadIdentity();
-    anyTriangle(0.228, 0.85, 0.2905, 0.85, 0.26, 0.9, 179, 119, 0);//tallBuilding3
+    // Tall Building Three
+    anyTriangle(0.228, 0.85, 0.2905, 0.85, 0.26, 0.9, 179, 119, 0);
     glTranslatef(0.5f, 0.1f, 0);
     glScalef(0.3, 1.08, 0);
-    anyQuad(-0.7f , 0.7f, -0.7f, 0.3f, -0.9f, 0.3f, -0.9f, 0.7f, 179, 119, 0);
+    anyQuad(-0.7f, 0.7f, -0.7f, 0.3f, -0.9f, 0.3f, -0.9f, 0.7f, 179, 119, 0);
     glLoadIdentity();
 
     wp1 = 0.405, wp2 = 0.75;
     for(int w = 0; w < 3; w++)
+    {
+        for(int wj = 0; wj < 7; wj++)
         {
-            for(int wj = 0; wj < 7; wj++){
-             glLoadIdentity();//smallWindowsTallBuilding3
-             glTranslatef(wp1, wp2, 0);
-             glScalef(0.23, 0.18, 0);
-             squareWindowComponent(R, G, B);
-             glLoadIdentity();
-             wp2 -= 0.045;
-            }
-            wp2 = 0.75;
-            wp1 += 0.018;
+            //  Small Window of Tall Building Three
+            glLoadIdentity();
+            glTranslatef(wp1, wp2, 0);
+            glScalef(0.23, 0.18, 0);
+            squareWindowComponent(R, G, B);
+            glLoadIdentity();
+            wp2 -= 0.045;
         }
+        wp2 = 0.75;
+        wp1 += 0.018;
+    }
 
-        glLoadIdentity();
-    //smallBuilding2
+    glLoadIdentity();
+
+    //  Small Building Two
     glTranslatef(1.4f, 0.1f, 0);
     glScalef(0.6, 0.8, 0);
-    anyQuad(-0.7f , 0.7f, -0.7f, 0.3f, -0.9f, 0.3f, -0.9f, 0.7f, 178, 190, 181);
+    anyQuad(-0.7f, 0.7f, -0.7f, 0.3f, -0.9f, 0.3f, -0.9f, 0.7f, 178, 190, 181);
     glLoadIdentity();
 
     wp1 = 1.275, wp2 = 0.4;
 
-            for(int wj = 0; wj < 3; wj++){
-             glLoadIdentity();//smallWindowsSmallBuilding2
-             glTranslatef(wp1, wp2, 0);
-             glScalef(0.5, 0.5, 0);
-             ovalWindowComponent(R, G, B);
-             glLoadIdentity();
-             wp2 -= 0.1;
-            }
+    //  => Small Buildings Small Window 2
+    for(int wj = 0; wj < 3; wj++)
+    {
+        glLoadIdentity();
+        glTranslatef(wp1, wp2, 0);
+        glScalef(0.5, 0.5, 0);
+        ovalWindowComponent(R, G, B);
+        glLoadIdentity();
+        wp2 -= 0.1;
+    }
 
-            wp1 = 1.382, wp2 = 0.53;
+    wp1 = 1.382, wp2 = 0.53;
     for(int w = 0; w < 2; w++)
+    {
+        //  =>  Tall Building's Small Window 3
+        for(int wj = 0; wj < 3; wj++)
         {
-            for(int wj = 0; wj < 3; wj++){
-             glLoadIdentity();//smallWindowsTallBuilding3
-             glTranslatef(wp1, wp2, 0);
-             glScalef(0.7, 0.2, 0);
-             squareWindowComponent(R, G, B);
-             glLoadIdentity();
-             wp2 -= 0.1;
-            }
-            wp2 = 0.53;
-            wp1 += 0.068;
+            glLoadIdentity();
+            glTranslatef(wp1, wp2, 0);
+            glScalef(0.7, 0.2, 0);
+            squareWindowComponent(R, G, B);
+            glLoadIdentity();
+            wp2 -= 0.1;
         }
+        wp2 = 0.53;
+        wp1 += 0.068;
+    }
 }
 
-void treeView(){
+    //  Side Trees
+void treeView()
+{
     glLoadIdentity();
     glTranslatef(0.2f, 0.2f, 0);
     treeComponent();
@@ -899,21 +934,29 @@ void treeView(){
     glLoadIdentity();
 }
 
-void desertView(){
+    // Desert
+void desertView()
+{
     anyQuad(1.0f, 0.5f, 1.0f, 0.1f, -1.0f, 0.1f, -1.0f, 0.5f, 76, 70, 50);
 }
 
-void NightSkyJoinedComponent(){
+    // Components for Night View
+void NightSkyJoinedComponent()
+{
     anyQuad(1.0f, 1.0f, 1.0f, -1.0f, -1.0f, -1.0f, -1.0f, 1.0f, 0, 0, 0);
     moonComponent();
     starComponent();
 }
 
-void skyView(){
+    // Sky Change Function
+void skyView()
+{
     (isDay) ? sunComponent() : NightSkyJoinedComponent();
 }
 
-void cloudView(){
+    // Cloud View Function
+void cloudView()
+{
     glPushMatrix();
     glTranslatef(cloud_position,0,0);
     cloudComponent();
@@ -935,55 +978,53 @@ void cloudView(){
     glPopMatrix();
 }
 
+    //  Rain View Function
 void rainView()
 {
-
     float x=0.0, y = 1.5, x1=-0.099;
     glColor3ub(255,255,255);
     glPushMatrix();
     glTranslatef(0,rainPos,0);
     glBegin(GL_LINES);
 
-    for(int i=600;i>=0;i--)
+    for(int i=600; i>=0; i--)
     {
-        for(int j=0;j<=i;j++)
+        for(int j=0; j<=i; j++)
         {
             glVertex3f(x,y,0);
             glVertex3f(x+0.05,y+0.09,0);
             x+=float(rand()%5)/10;
-           // x-=rand()%1050;
         }
-        for(int j=0;j<=i;j++)
+        for(int j=0; j<=i; j++)
         {
             glVertex3f(x1,y,0);
             glVertex3f(x1+0.05,y+0.09,0);
-            //x+=rand()%1050;
             x1-=float(rand()%5)/10;
         }
         y+=float(rand()%10)/10;
-        //y-=rand()%15;
         x=0.0;
         x1=-0.099;
-
     }
     glEnd();
     glPopMatrix();
 }
 
-void instructions(){
-    anyText("p = pause , s = start , key up = increase , key down = decrease , key left = car horn , key right = ship horn", -0.95f, -0.90f, 255, 255, 255);
-    anyText("d = day \\ night , a = auto on \\ off , r = rain on \\ off , i = info hide \\ show , f = fullscreen \\ minimized , e = exit", -0.95f, -0.95f, 255, 255, 255);
+    //  Instructions
+void instructions()
+{
+    anyText("P = PAUSE , S = START , KEY UP = SPEED INCREASE , KEY DOWN = SPEED DECREASE , KEY LEFT = CAR HORN , KEY RIGHT = HORN FOR SHIP", -0.95f, -0.90f, 255, 255, 255);
+    anyText("D = CHANGE VIEW , A = AUTO ON \\ OFF , R = RAIN ON \\ OFF , I = INFO HIDE \\ SHOW , F = FULL SCREEN \\ MINIMIZED , E = EXIT", -0.95f, -0.95f, 255, 255, 255);
 }
 
+    // Full Screen Compatibility
 void fullView()
 {
     initState();
-    //axisDraw();
     skyView();
     (isDay) ? mountainView(15, 114, 22) : mountainView(0, 51, 17);
     (isRainy) ? cloudView() : blank();
     desertView();
-    (isDay) ? buildingsView(0, 0 , 0) : buildingsView(255,255,224);
+    (isDay) ? buildingsView(0, 0, 0) : buildingsView(255,255,224);
     ahsanMonjilView();
     treeView();
     (isDay) ? roadView(255, 255, 255): roadView(255, 255, 0);
@@ -994,91 +1035,96 @@ void fullView()
     glFlush();
 }
 
-void handleKeypress(unsigned char key, int x, int y) {
-	switch (key)
-	{
-        case 'p':
-            car_speed = 0.0f;
-            ship_speed = 0.0f;
-            break;
-        case 's':
-            car_speed = 0.079f;
-            ship_speed = 0.005f;
-            break;
-        case 'd':
-            isAuto = false;
-            isDay = !isDay;
-            break;
-        case 'r':
-             isAuto = false;
-            isRainy = !isRainy;
-            (isRainy) ? PlaySound("assets/rain.wav", NULL, SND_FILENAME|SND_ASYNC|SND_LOOP) : PlaySound(NULL, 0, 0);
-            break;
-        case 'i':
-            isHide = !isHide;
-            break;
-        case 'f':
-            isFullScreen = !isFullScreen;
-            (isFullScreen) ? glutFullScreen() : glutReshapeWindow(1200, 800);
-            break;
-        case 'a':
-            isAuto = !isAuto;
-            break;
-        case 'e':
-            exit(0);
-            break;
-        glutPostRedisplay();
-	}
-}
-
-
-void handleMouse(int button, int state, int x, int y) {
-	if (button == GLUT_LEFT_BUTTON)
-        {
-        }
-    if (button == GLUT_RIGHT_BUTTON)
-        {
-        }
-	glutPostRedisplay();
-
-}
-
-
-
-void SpecialInput(int key, int x, int y)
+    //  Instruction Triggers
+void handleKeypress(unsigned char key, int x, int y)
 {
-    switch(key)
+    switch (key)
     {
-        case GLUT_KEY_UP:
-            car_speed += 0.05;
-            ship_speed += 0.005f;
-            break;
-        case GLUT_KEY_DOWN:
-            if(car_speed > 0.05 || ship_speed > 0.005){
-                car_speed -= 0.05;
-                ship_speed -= 0.005f;
-            }
-            else{
-                car_speed = 0.0f;
-                ship_speed = 0.0f;
-            }
-            break;
-        case GLUT_KEY_LEFT:
-            PlaySound("assets/car_double_horn.wav", NULL, SND_FILENAME|SND_ASYNC);
-            break;
-        case GLUT_KEY_RIGHT:
-            PlaySound("assets/ship.wav", NULL, SND_FILENAME|SND_ASYNC);
-            break;
-        }
+    case 'p':
+        car_speed = 0.0f;
+        ship_speed = 0.0f;
+        break;
+    case 's':
+        car_speed = 0.079f;
+        ship_speed = 0.005f;
+        break;
+    case 'd':
+        isAuto = false;
+        isDay = !isDay;
+        break;
+    case 'r':
+        isAuto = false;
+        isRainy = !isRainy;
+        (isRainy) ? PlaySound("assets/rain.wav", NULL, SND_FILENAME|SND_ASYNC|SND_LOOP) : PlaySound(NULL, 0, 0);
+        break;
+    case 'i':
+        isHide = !isHide;
+        break;
+    case 'f':
+        isFullScreen = !isFullScreen;
+        (isFullScreen) ? glutFullScreen() : glutReshapeWindow(1400, 800);
+        break;
+    case 'a':
+        isAuto = !isAuto;
+        break;
+    case 'e':
+        exit(0);
+        break;
+        glutPostRedisplay();
+    }
+}
+
+    // Mouse Compatibility
+void handleMouse(int button, int state, int x, int y)
+{
+    if (button == GLUT_LEFT_BUTTON)
+    {
+    }
+    if (button == GLUT_RIGHT_BUTTON)
+    {
+    }
     glutPostRedisplay();
 }
 
 
-int main(int argc, char** argv) {
+    // Speed Up & Down
+void SpecialInput(int key, int x, int y)
+{
+    switch(key)
+    {
+    case GLUT_KEY_UP:
+        car_speed += 0.05;
+        ship_speed += 0.005f;
+        break;
+    case GLUT_KEY_DOWN:
+        if(car_speed > 0.05 || ship_speed > 0.005)
+        {
+            car_speed -= 0.05;
+            ship_speed -= 0.005f;
+        }
+        else
+        {
+            car_speed = 0.0f;
+            ship_speed = 0.0f;
+        }
+        break;
+    case GLUT_KEY_LEFT:
+        PlaySound("assets/car_double_horn.wav", NULL, SND_FILENAME|SND_ASYNC);
+        break;
+    case GLUT_KEY_RIGHT:
+        PlaySound("assets/ship.wav", NULL, SND_FILENAME|SND_ASYNC);
+        break;
+    }
+    glutPostRedisplay();
+}
+
+
+int main(int argc, char** argv)
+{
     FreeConsole();
     glutInit(&argc, argv);
-    glutInitWindowSize(1200, 800);
-    glutCreateWindow("Ahsan Monjil");
+    glutInitWindowSize(1400, 800);
+    glutCreateWindow("AHSAN MANZIL FRONT VIEW");
     glutDisplayFunc(fullView);
     glutIdleFunc(Idle);
     glutKeyboardFunc(handleKeypress);
